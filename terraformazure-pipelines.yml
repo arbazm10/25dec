@@ -66,6 +66,8 @@ stages:
       inputs:
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)terraform'
+        backendType: 'azurerm'
+        backendServiceArm: 'terraformaccess'
         allowTelemetryCollection: false
     - task: TerraformCLI@2
       inputs:
