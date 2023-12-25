@@ -66,11 +66,6 @@ stages:
       inputs:
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)terraform'
-        backendType: 'azurerm'
-        backendServiceArm: 'terraformaccess'
-        backendAzureRmStorageAccountName: 'terraformdev25'
-        backendAzureRmContainerName: 'terraform'
-        backendAzureRmKey: 'terraform.tfstate'
         allowTelemetryCollection: false
     - task: TerraformCLI@2
       inputs:
