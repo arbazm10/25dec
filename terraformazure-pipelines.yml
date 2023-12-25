@@ -67,7 +67,7 @@ stages:
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)terraform'
         backendType: 'azurerm'
-        backendServiceArm: 'devopsterra'
+        backendServiceArm: 'terraformaccess'
         backendAzureRmStorageAccountName: 'terraformdev25'
         backendAzureRmContainerName: 'terraform'
         backendAzureRmKey: 'terraform.tfstate'
