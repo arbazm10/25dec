@@ -37,4 +37,5 @@ stages:
       inputs:
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        environmentServiceName: 'terraformaccess'
         allowTelemetryCollection: false
