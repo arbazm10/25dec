@@ -9,11 +9,32 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+stages:
+- stage:
+  jobs:
+  - job: 
+    steps:
+    - task: TerraformInstaller@2
+      inputs:
+        terraformVersion: 'latest'
+    - task: TerraformCLI@2
+      inputs:
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)terraform'
+        allowTelemetryCollection: false
+    - task: TerraformCLI@2
+      inputs:
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        backendType: 'azurerm'
+        backendServiceArm: 'terraformaccess'
+        backendAzureRmResourceGroupName: 'arbaz'
+        backendAzureRmStorageAccountName: 'terraformdev25'
+        backendAzureRmContainerName: 'terraform'
+        backendAzureRmKey: 'terraform.tf'
+        allowTelemetryCollection: false
+    - task: TerraformCLI@2
+      inputs:
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        allowTelemetryCollection: false
