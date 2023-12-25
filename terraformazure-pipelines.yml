@@ -64,6 +64,16 @@ stages:
         allowTelemetryCollection: false
     - task: TerraformCLI@2
       inputs:
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)terraform'
+        backendType: 'azurerm'
+        backendServiceArm: 'devopsterra'
+        backendAzureRmStorageAccountName: 'terraformdev25'
+        backendAzureRmContainerName: 'terraform'
+        backendAzureRmKey: 'terraform.tfstate'
+        allowTelemetryCollection: false
+    - task: TerraformCLI@2
+      inputs:
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
         environmentServiceName: 'Azure subscription 1(898734ae-50a5-4891-b151-0d0c58eaf0d6)'
