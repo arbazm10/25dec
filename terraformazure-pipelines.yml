@@ -37,3 +37,16 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+    - bash: echo Contents in System Default Working Directory: ls -R $(System.DefaultWorkingDirectory)
+    - bash: echo Before copying Contents in Build Artifact Directory: ls -R $(Build.ArtifactStagingDirectory)
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        OverWrite: true
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'k8s yaml need in release pipeline'
+        publishLocation: 'Container'
