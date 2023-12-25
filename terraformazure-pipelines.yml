@@ -51,27 +51,3 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'k8s yaml need in release pipeline'
         publishLocation: 'Container'
-- stage:
-  jobs:
-  - job:
-    steps:
-    - task: TerraformInstaller@2
-      inputs:
-        terraformVersion: 'latest'
-    - task: TerraformCLI@2
-      inputs:
-        command: 'validate'
-        allowTelemetryCollection: false
-    - task: TerraformCLI@2
-      inputs:
-        command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)terraform'
-        backendType: 'azurerm'
-        backendServiceArm: 'terraformaccess'
-        allowTelemetryCollection: false
-    - task: TerraformCLI@2
-      inputs:
-        command: 'plan'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-        environmentServiceName: 'Azure subscription 1(898734ae-50a5-4891-b151-0d0c58eaf0d6)'
-        allowTelemetryCollection: false
